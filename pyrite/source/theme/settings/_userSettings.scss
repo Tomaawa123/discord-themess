@@ -1,0 +1,233 @@
+@use "backend" as *;
+/* Start User Settings */
+#{c(main layer)},
+#{c(userSettings standardSidebarView)},
+#{c(userSettings contentRegion)} {
+  background-color: transparent;
+}
+#{c(userSettings sidebarRegionScroller)} {
+  background-color: $side;
+}
+#{c(userSettings sidebar)} {
+  #{c(userSettings sidebarHeader)} {
+    @include header;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  #{c(userSettings sidebarSeparator)} {
+    background-color: $secondary;
+  }
+}
+#{c(userSettings sidebarInfo)} {
+  #{c(chatForm colorMuted)} {
+    color: #fff;
+  }
+}
+#{c(userSettings sidebarItem)} {
+  &[style*="color: rgb(114, 137, 218)"] {
+    color: $primary !important; // !important reason: element.style
+  }
+  &[style*="background-color: rgba(114, 137, 218, 0.1)"] {
+    background-color: transparent !important; // !important reason: element.style
+    color: $primary;
+    @include bg;
+    &:before {
+      background-color: $primary;
+      opacity: 0.1;
+      border-radius: 6px;
+    }
+  }
+  &[style*="background-color: rgb(114, 137, 218)"] {
+    background-color: $primary !important; // !important reason: element.style
+    color: #fff !important; // !important reason: element.style, overlapping rules
+  }
+}
+
+#{c(userSettings contentRegionScroller)} {
+  background-color: $middle;
+  #{c(serverSettings auditScroller)} {
+    background-color: transparent;
+  }
+}
+
+#{c(userSettings contentColumn)} {
+  #{c(userSettings contentHeader)} {
+    @include header;
+  }
+  #{c(userSettings contentBackground)} {
+    @include card;
+  }
+  #{c(userSettings fieldList)} {
+    background-color: rgba(0,0,0,0.25);
+  }
+}
+
+#{c(userSettings profileDetailsInner)} {
+  &>span:not(#{c(userSettings username)}) {
+    filter: blur(5px);
+    transition: all 0.5s ease-in-out;
+    &:hover {
+      filter: none;
+    }
+  }
+}
+#{c(userSettings profile)} ~ #{c(userSettings fieldList)} #{c(userSettings field)}:first-child {
+  #{c(userSettings usernameRow)} #{c(userSettings usernameRowInner)} {
+    &>span:last-child {
+      filter: blur(5px);
+      transition: all 0.5s ease-in-out;
+    }
+    &:hover>span:last-child {
+      filter: none;
+    }
+  }
+}
+
+#{c(userSettings radioGroupItem)} {
+  background-color: rgba(0,0,0,0.5);
+  &:hover:not([aria-checked=true]) {
+    background-color: rgba(0,0,0,0.3);
+  }
+  &[aria-checked=true] {
+    background-color: rgba(0,0,0,0.7);
+  }
+}
+#{c(userSettings radioBar)} {
+  border-left: 3px solid #fff;
+  border-left-color: var(--offline-color);
+  border-left-color: var(--radio-bar-accent-color);
+  &[style*="--radio-bar-accent-color"] {
+    #{c(userSettings radioIconForeground)} {
+      color: var(--radio-bar-accent-color);
+    }
+  }
+  &[style*="hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%)"] {
+    --radio-bar-accent-color: var(--green-color) !important; // !important reason: element.style
+  }
+  &[style*="hsl(38, calc(var(--saturation-factor, 1) * 95.7%), 54.1%)"] {
+    --radio-bar-accent-color: var(--yellow-color) !important; // !important reason: element.style
+  }
+  &[style*="hsl(21, calc(var(--saturation-factor, 1) * 90.7%), 57.6%)"] {
+    --radio-bar-accent-color: var(--secret-orange) !important; // !important reason: element.style
+  }
+  &[style*="hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%)"] {
+    --radio-bar-accent-color: var(--red-color) !important; // !important reason: element.style
+  }
+}
+#{c(userSettings radioIconForeground)} {
+  color: $primary;
+}
+
+#{c(userSettings cardPrimary)},
+#{c(userSettings cardPrimaryEditable)},
+#{c(userSettings cardPrimaryOutline)},
+#{c(userSettings cardPrimaryOutlineEditable)} {
+  @include card;
+}
+
+// @debug "Connections need to be done based on icons of cards. VERY LIKELY will be impossible to do with height changing.";
+#{c(userSettings accountList)} {
+  @include card;
+}
+#{c(userSettings accountButton)} #{c(userSettings accountButtonInner)} {
+  background-color: rgba(0,0,0,0.5);
+  &:hover {
+    background-color: rgba(0,0,0,0.3);
+  }
+}
+#{c(userSettings connection)} {
+  @include card;
+  #{c(userSettings connectionHeader)} {
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px 20px;
+  }
+}
+#{c(main light)} {
+  #{c(userSettings connectionHeader)} {
+    background-color: rgba(255,255,255,0.05);
+  }
+}
+
+#{c(main dark)},
+#{c(main light)} {
+  #{c(userSettings codeRedemptionRedirect)} {
+    @include card;
+  }
+}
+
+#{c(main dark)},
+#{c(main light)} {
+  #{c(userSettings nitroFeature)} {
+    @include card;
+    min-height: unset;
+    padding: 16px;
+    #{c(userSettings nitroFeatureImageWrapper)} {
+      display: none;
+    }
+  }
+}
+#{c(userSettings nitroPage)} {
+  #{c(userSettings nitroHero)} {
+    background-image: none;
+    height: initial;
+    max-width: initial;
+    #{c(userSettings nitroHeroButtons)} {
+      > button {
+        background-color: $primary;
+        > #{c(button contents)} {
+          color: #fff;
+        }
+      }
+    }
+  }
+  #{c(userSettings nitroBanner)} {
+    @include card;
+  }
+}
+
+#{c(main dark)},
+#{c(main light)} {
+  #{c(userSettings boostCardGemContainer)} {
+    background-color: rgba(0,0,0,0.05);
+  }
+}
+#{c(userSettings boostGuildsSection)} {
+  margin-bottom: 32px;
+}
+#{c(userSettings boostCardWrapper)} {
+  @include card;
+  #{c(userSettings boostCardNoIcon)} {
+    background-color: rgba(255,255,255,0.05);
+  }
+}
+#{c(userSettings boostDealWrapper)} {
+  &:before {
+    content: none;
+  }
+  #{c(userSettings boostDealAction)} {
+    > button {
+      > #{c(button contents)} {
+        color: #fff;
+      }
+    }
+  }
+}
+
+#{c(main dark)},
+#{c(main light)} {
+  #{c(userSettings closeButtonKeybind)} {
+    color: $primary;
+  }
+  #{c(userSettings closeButton)} {
+    color: $primary;
+    border-color: currentColor;
+    &:hover,
+    &:active {
+      color: $hover;
+      background-color: transparent;
+    }
+  }
+  #{c(userSettings closeButton)}>svg>path {
+    fill: currentColor;
+  }
+}

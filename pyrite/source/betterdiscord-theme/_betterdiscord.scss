@@ -1,0 +1,349 @@
+// what goes in here?
+// - things that are only work with BD.
+// - BD plugins
+
+@use "start" as *;
+/*! #{$theme-name} v#{$version} - BD Addon by LeafyLuigi */
+
+@use "classes" as *;
+
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
+$hover: var(--hover-color);
+$side: var(--side-shading);
+$middle: var(--middle-shading);
+$header: var(--header-shading);
+$card: var(--card-background);
+
+/* Begin BD Addon */
+#{c(bd addonList)} {
+	#{c(bd addonCard)} {
+		background-color: transparent;
+	}
+	#{c(bd addonHeader)} {
+		background-color: $header;
+	}
+	#{c(bd addonDescWrap)},
+	#{c(bd addonFooter)} {
+		background: $card;
+	}
+}
+#{c(bd searchWrapper)} {
+	background-color: $card;
+	border: $primary;
+}
+// .floating-window #bd-editor-controls 
+// 
+#{c(userSettings contentColumn)},
+#{c(bdEditor floatingWindow)} {
+	#bd-editor-controls {
+		background-color: $header;
+	}
+	#{c(bdEditor monaco)},
+	#{c(bdEditor monacoBackground)},
+	#{c(bdEditor monaco)} #{c(bdEditor monacoInputArea)}#{c(bdEditor monacoIMEInput)} {
+		background-color: transparent;
+	}
+	#{c(bdEditor monaco)} {
+		#{c(bdEditor monacoMargin)} {
+			background-color: $side;
+		}
+		#{c(bdEditor monacoEditorScrollable)} {
+			background-color: $middle;
+		}
+		#{c(bdEditor monacoFocused)} {
+			#{c(bdEditor monacoSelectedText)} {
+				background-color: transparent;
+				&:before {
+					content: "";
+					width: inherit;
+					height: inherit;
+					background-color: $primary;
+					opacity: 0.5;
+				}
+			}
+		}
+		#{c(bdEditor monacoSelectedText)} {
+			background-color: transparent;
+			&:before {
+				content: "";
+				width: inherit;
+				height: inherit;
+				background-color: $primary;
+				opacity: 0.5;
+			}
+		}
+	}
+}
+#{c(bdEditor floatingWindow)} {
+	z-index: 1000;
+	&[style*="top: 0px;"],&[style*="top: 1px;"],&[style*="top: 2px;"],&[style*="top: 3px;"],&[style*="top: 4px;"],&[style*="top: 5px;"],&[style*="top: 6px;"],&[style*="top: 7px;"],&[style*="top: 8px;"],&[style*="top: 9px;"],
+	&[style*="top: 10px;"],&[style*="top: 11px;"],&[style*="top: 12px;"],&[style*="top: 13px;"],&[style*="top: 14px;"],&[style*="top: 15px;"],&[style*="top: 16px;"],&[style*="top: 17px;"],&[style*="top: 18px;"],&[style*="top: 19px;"],
+	&[style*="top: 20px;"],&[style*="top: 21px;"],&[style*="top: 22px;"],&[style*="top: 23px;"],&[style*="top: 24px;"],&[style*="top: 25px;"],&[style*="top: 26px;"],&[style*="top: 27px;"],&[style*="top: 28px;"],&[style*="top: 29px;"],
+	&[style*="top: 30px;"],&[style*="top: 31px;"],&[style*="top: 32px;"],&[style*="top: 33px;"],&[style*="top: 34px;"],&[style*="top: 35px;"],&[style*="top: 36px;"],&[style*="top: 37px;"],&[style*="top: 38px;"],&[style*="top: 39px;"],
+	&[style*="top: 40px;"],&[style*="top: 41px;"],&[style*="top: 42px;"],&[style*="top: 43px;"],&[style*="top: 44px;"],&[style*="top: 45px;"],&[style*="top: 46px;"],
+	&[style*="top: 47px;"] {
+		top: 48px !important; // !important reason: element.style
+	}
+}
+#{c(bdEditor floatingWindowTitlebar)} {
+	background-color: $header;
+}
+#{c(bdEditor floatingWindowContent)} {
+	background-color: transparent;
+}
+
+// Minimal Mode Fixes
+#{c(os windows)} {
+	#{c(bd minimal)} {
+		#{c(serverList servers)}:before {
+			top: -40px;
+			height: 40px;
+			width: 55px;
+		}
+		#{c(os winButton)} {
+			height: 40px;
+		}
+	}
+}
+#{c(os mac)} {
+	#{c(bd minimal)} {
+		#{c(serverList servers)}:before {
+			top: -40px;
+			height: 40px;
+			width: 55px;
+		}
+		#{c(os typeMac)} #{c(os macButtons)} {
+			height: 40px;
+		}
+	}
+}
+#{c(os linux)} #{c(bd minimal)} #{c(serverList servers)} {
+	margin-top: -8px;
+}
+#{c(os web)} #{c(bd minimal)} #{c(serverList servers)} {
+	margin-top: -8px;
+}
+#{c(bd minimal)} {
+	#{c(friends nowPlayingColumn)} {
+		left: unset;
+		margin-left: unset;
+	}
+	#{c(sidebar sidebar)} {
+		&:before {
+			top: 40px;
+			width: 200px;
+		}
+		&:after {
+			height: 40px;
+			width: 200px;
+		}
+	}
+	#{c(sidebar privateChannels)} #{c(sidebar scroller)},
+	#{c(sidebar channelsContainer)} #{c(sidebar channelsScroller)},
+	#{c(memberList wrap)} #{c(memberList members)},
+	#{c(sidebar panels)} {
+		width: 200px;
+	}
+	
+	#{c(sidebar panelContainer)} {
+		padding: 0;
+		width: 200px;
+	}
+	
+	#{c(serverList servers)} {
+		margin-top: 40px;
+	}
+	
+	#{c(header header)},
+	#{c(sidebar channelsHeader)},
+	#{c(sidebar searchBar)} {
+		height: 40px;
+	}
+	#{c(friends nowPlayingColumn)} {
+		background-color: var(--side-shading);
+	}
+	
+	#{c(sidebar privateChannel)}[href="/channels/@me"] {
+		width: unset;
+		margin-left: 8px;
+		padding: 1px 0;
+		display: block;
+		#{c(memberList avatar)} {
+			margin-right: 12px;
+			flex-grow: 0;
+		}
+		#{c(memberList contentName)}, 
+		#{c(memberList contentChildren)} {
+			display: unset;
+		}
+	}
+	#{c(memberList wrap)} {
+		transition: 250ms cubic-bezier(.52,0,.74,0);
+	}
+	#{c(modals messagesPopoutWrap)}, 
+	#{c(modals unreadsWrap)} {
+		top: unset;
+	}
+	#{c(sidebar panelActionButtons)} #{c(button contents)} {
+		font-size: 0;
+	}
+	#{c(button icon)}#{c(button withText)} {
+		margin-right: 0;
+	}
+	
+	#{c(call root)} {
+		top: 40px;
+		height: calc(100% - 40px);
+		&::before {
+			height: 40px;
+			top: -40px;
+		}
+		#{c(stage videoControls)} #{c(stage videoControlSection)} {
+			top: -40px;
+			&#{c(stage videoControlBottom)} {
+				top: 0;
+			}
+		}
+	}
+	#{c(sidebar channelsContainer)} #{c(sidebar animatedContainer)} {
+		top: 40px;
+	}
+}
+
+// Channel Tabs Plugin
+body #{c(main appInner)} {
+	#channelTabs-container {
+		z-index: 1011;
+		top: calc(-22px * var(--horizontal-server-list-enabled,0));
+		position: relative;
+	}
+	#channelTabs-settingsMenu {
+		border-radius: 0;
+		position: absolute;
+		top: 36px;
+		right: 0;
+		height: 30px;
+		background-color: transparent;
+		&:hover {
+			background-color: $card;
+		}
+	}
+	#{c(bdPlugin channelTabsTabContainer)} {
+		max-height: 36px;
+		background-color: $header;
+		display: flex;
+		overflow-x: scroll;
+		width: 100vw;
+		&::-webkit-scrollbar,
+		&::-webkit-scrollbar-thumb,
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar-corner {
+			display: none;
+		}
+	}
+	#{c(bdPlugin channelTabsFavContainer)} {
+		background-color: $middle;
+		max-height: 30px;
+		border-bottom: dashed 1px $primary;
+		margin-bottom: -1px;
+		overflow-x: scroll;
+		display: flex;
+		width: 100vw;
+		&::-webkit-scrollbar,
+		&::-webkit-scrollbar-thumb,
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar-corner {
+			display: none;
+		}
+	}
+	#{c(bdPlugin channelTabsClose)} {
+		-webkit-app-region: no-drag;
+		background: $primary;
+		color: var(--text-normal);
+		&:hover {
+			background: $hover;
+		}
+	}
+	#{c(bdPlugin channelTabsNewTab)} {
+		position: fixed;
+		display: none;
+		right: 0;
+		top: calc(var(--channelTabs-tabHeight) / 2 - 2px);
+		margin: 0 7px 0 0;
+		-webkit-app-region: no-drag;
+		background: $primary;
+		color: var(--text-normal);
+		&:hover {
+			background: $hover;
+		}
+		&:nth-child(2),&:nth-child(3),&:nth-child(4),&:nth-child(5),&:nth-child(6),&:nth-child(7),&:nth-child(8),&:nth-child(9),
+		&:nth-child(10),&:nth-child(11),&:nth-child(12),&:nth-child(13),&:nth-child(14),&:nth-child(15),&:nth-child(16),&:nth-child(17) {
+			display: block;
+		}
+	}
+	#{c(bdPlugin channelTabsTab)} {
+		border: 1px solid $card;
+		margin: 1px -1px 1px 3px;
+		&#{c(bdPlugin channelTabsTabSelected)} {
+			border-color: $primary;
+			background-color: transparent;
+		}
+		#{c(bdPlugin channelTabsClose)} {
+		background: $primary;
+		color: var(--text-normal);
+		&:hover {
+				background: $hover;
+			}
+		}
+	}
+	#{c(bdPlugin channelTabsNoMention)},
+	#{c(bdPlugin channelTabsNoUnread)} {
+		display: none;
+	}
+	#{c(bdPlugin channelTabsFav)} {
+		&:hover {
+			background-color: $card;
+		}
+	}
+	#{c(bdPlugin channelTabsUnreadBadge)} {
+		background-color: $card;
+	}
+	#{c(bdPlugin channelTabsMentionBadge)} {
+		background-color: $primary;
+	}
+
+}
+body #{c(os typeMac)}#{c(os titleBar)} ~ div #channelTabs-container > :first-child > :first-child {
+	margin-left: 3px;
+}
+
+// Better Image Viewer Plugin
+body {
+	#{c(bdPlugin betterImageViewer)} {
+		z-index: 1200;
+	}
+	#{c(bdPlugin betterImageViewerLensRound)},
+	#{c(bdPlugin betterImageViewerLens)} {
+		border-color: $primary;
+	}
+}
+
+// Xeno Library Plugin
+body {
+	#{c(bdPlugin xenoLibNotifs)} {
+		top: calc( 48px + (68px * var(--channel-tabs-enabled,0) + 75px * var(--horizontal-server-list-enabled,0)) );
+		z-index: 1100;
+	}
+	#{c(bdPlugin xenoLibNotifContentWrapper)} {
+		#{c(bdPlugin xenoLibNotifLoadbar)} {
+			background-image: linear-gradient(130deg, $primary, $secondary);
+		}
+	}
+}
+
+// Fix for one of DevilBro's plugins - BDFDB
+// For some ungodly reason the prick thinks it's a good idea to change layerContainer.
+div.appMount-3lHmkl > .layerContainer-yqaFcK {
+	z-index: 1100; // "div" is there to overwrite the css priority.
+}

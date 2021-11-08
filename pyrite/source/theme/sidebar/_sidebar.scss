@@ -1,0 +1,260 @@
+@use "backend" as *;
+/* Start Sidebar */
+// Base
+#{c(sidebar sidebar)} {
+  background-color: transparent;
+  @include bg;
+  @include bg2;
+  &:before {
+    background-color: $side;
+    top: 48px;
+    width: 240px;
+  }
+  &:after {
+    background-color: $header;
+    height: 48px;
+    width: 240px;
+    z-index: 1001;
+  }
+}
+#{c(os mac)} {
+  #{c(sidebar sidebar)}:after {
+    -webkit-app-region: drag;
+  }
+}
+// Area - Friends List
+#{c(sidebar privateChannels)} {
+  background-color: transparent;
+  #{c(sidebar searchBar)} {
+    z-index: 1010;
+    background-color: transparent;
+    box-shadow: none;
+  }
+  #{c(sidebar scroller)} {
+    background-color: transparent;
+    width: 240px;
+    #{c(sidebar privateChannel)}[href="/store"],
+    #{c(sidebar privateChannel)}[href="/library"] {
+      display: none;
+    }
+  }
+  #{c(sidebar privateChannelsHeader)} {
+    @include header;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    &:before {
+      content: "";
+      height: 2px;
+      flex-grow: 1;
+      margin-right: 5px;
+      background: linear-gradient(to left, currentColor -50%, transparent 50%);
+    }
+  }
+  #{c(sidebar privateChannelRecipientsInviteButtonIcon)} {
+    color: #fff;
+    order: -1;
+    &:hover {
+      color: #fff;
+      filter: drop-shadow(0 0 2px #aaa);
+    }
+  }
+}
+#{c(sidebar searchBar)} {
+  #{c(sidebar searchBarComponent)} {
+    -webkit-app-region: no-drag;
+    background-color: var(--card-background);
+  }
+}
+// Area - Channels
+#{c(sidebar channelsContainer)} {
+  background: transparent;
+  #{c(sidebar channelsContainerContent)} {
+    >div[style="height: 84px;"]{
+      height: 132px !important; // !important reason: element.style
+    }
+  }
+  #{c(sidebar channelsHeaderContainer)} {
+    box-shadow: none;
+    #{c(sidebar serverName)} {
+      @include header;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #{c(sidebar channelsHeader)} {
+      z-index: 1010;
+      box-shadow: none;
+    }
+  }
+  #{c(sidebar animatedContainer)} {
+    background-color: transparent;
+    top: 48px;
+    z-index: 2;
+    &[style*="(-90px)"] {
+      z-index: -3000;
+    }
+    #{c(sidebar bannerImage)} {
+      &:before {
+        content: none;
+      }
+    }
+  }
+  #{c(sidebar channelsScroller)} {
+    background-color: transparent;
+    width: 240px;
+  }
+}
+#{c(sidebar channelModeUnread)} {
+  #{c(sidebar channelUnreadBlob)} {
+    background-color: $primary;
+    filter: drop-shadow(0 0 2px $primary) drop-shadow(0 0 4px $primary);
+  }
+  // #{c(sidebar channelIcon)},
+  // #{c(sidebar channelName)} {
+  //   color: $primary;
+  // }
+}
+#{c(sidebar bannerVisible)} #{c(sidebar channelsHeader)} {
+  filter: none;
+}
+#{c(sidebar voiceSpeaking)} {
+	box-shadow: inset 0 0 0 2px $primary;
+}
+
+#{c(sidebar noAccessCategory)},
+#{c(sidebar noAccessChannelIcon)},
+#{c(sidebar noAccessChannelName)} {
+  background-color: $primary;
+}
+
+
+// Panels
+#{c(sidebar panels)} {
+  background-color: transparent;
+  width: 240px;
+  #{c(sidebar panelUsername)} {
+    @include header;
+  }
+  #{c(sidebar panelContainer)} #{c(sidebar panelButtonRow)},
+  #{c(sidebar panelVoiceContainer)} #{c(sidebar panelInner)} ~ #{c(sidebar panelButtonRow)},
+  #{c(sidebar panelActivityContainer)} #{c(sidebar panelActivityActions)} {
+    transform: skewX(-15deg);
+    border: 1px solid $middle;
+  }
+}
+#{c(sidebar panelButton)} {
+  &:hover {
+    background-color: transparent;
+  }
+  @include bg;
+  &:before {
+    background-color: $primary;
+    opacity: 0.6;
+  }
+  &:hover:before {
+    background-color: $hover;
+  }
+  > #{c(button contents)} {
+    transform: skewX(15deg);
+  }
+}
+
+#{c(sidebar channelCategoryContainerDefault)} {
+  #{c(sidebar channelChildren)},
+  #{c(sidebar categoryChildren)} {
+    order: 1;
+  }
+  #{c(sidebar channelMainContent)},
+  #{c(sidebar categoryMainContent)} {
+    order: 2;
+  }
+  #{c(sidebar categoryWrapper)} {
+    #{c(sidebar categoryName)} {
+      color: #aaa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:before {
+        content: "";
+        height: 2px;
+        flex-grow: 1;
+        background: transparent;
+        margin-right: 5px;
+      }
+    }
+    &:not( #{c(sidebar categoryCollapsed)} ) {
+      #{c(sidebar categoryName)} {
+        color: #fff;
+        &:before {
+          background: linear-gradient(to left, currentColor -50%, transparent 50%);
+        }
+      }
+    }
+  }
+  &#{c(sidebar channelModeMuted)} {
+    #{c(sidebar channelName)} {
+      color: var(--interactive-muted);
+    }
+  }
+}
+#{c(sidebar channelUserLimitWrapper)} {
+  background-color: $card;
+}
+#{c(sidebar channelUsers)} {
+  background-color: transparent;
+}
+#{c(sidebar channelTotal)} {
+  background-color: transparent;
+  &:after {
+    content: "/";
+    width: auto;
+    height: auto;
+    border: none;
+    left: -6px;
+  }
+}
+
+// VOICE CHANNEL WHEN FULL. REQUIRES ARIA-LABEL.
+@debug "Aria Label list in Sidebar";
+#{c(sidebar channelMainContent)} {
+  &[aria-label="Denne kanal er fuld."], // Danish
+  &[aria-label="Dieser Kanal ist voll."], // German
+  &[aria-label="This channel is full."], // English
+  &[aria-label="Este canal está lleno."], // Spanish
+  &[aria-label="Ce salon est plein."], // French
+  &[aria-label="Ovaj kanal je pun."], // Croatian
+  &[aria-label="Questo canale è pieno."], // Italian
+  &[aria-label="Kanalas pilnas."], // Lithuanian
+  &[aria-label="Ez a csatorna megtelt."], // Hungarian
+  &[aria-label="Dit kanaal is vol."], // Dutch
+  &[aria-label="Denne kanalen er full."], // Norwegian
+  &[aria-label="Ten kanał jest pełny."], // Polish
+  &[aria-label="Este canal está lotado."], // Portuguese
+  &[aria-label="Acest canal este plin."], // Romanian
+  &[aria-label="Tämä kanava on täynnä."], // Finnish
+  &[aria-label="Den här kanalen är full."], // Swedish
+  &[aria-label="Kênh đã đầy."], // Vietnamese
+  &[aria-label="Bu kanal dolu."], // Turkish
+  &[aria-label="Tento kanál je plný."], // Czech
+  &[aria-label="Αυτό το κανάλι είναι γεμάτο."], // Greek
+  &[aria-label="Този канал е пълен."], // Bulgarian
+  &[aria-label="Этот канал заполнен."], // Russian
+  &[aria-label="Цей канал переповнений."], // Ukranian
+  &[aria-label="ช่องนี้เต็ม"], // Thai
+  &[aria-label="此频道已满。"], // Chinese (mainland)
+  &[aria-label="このチャンネルは満員です。"], // Japanese
+  &[aria-label="此頻道已滿。"], // Chinese (Taiwan)
+  &[aria-label="채널 인원이 다 찼어요."] // Korean
+    {
+    ~ #{c(sidebar channelChildren)} #{c(sidebar channelUserLimitWrapper)} {
+      color: #f04747;
+    }
+  }
+}
+
+// unread channels: hides dot, makes channel name and icon $main
+// make read text normal
+// make mutes text muted 

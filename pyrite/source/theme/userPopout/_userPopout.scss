@@ -1,0 +1,108 @@
+@use "backend" as *;
+/* Start User Popout */
+#{c(userPopout popout)} {
+	position: relative;
+	box-shadow: none;
+	max-height: 580px;
+	background-color: transparent;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: var(--user-popout-image) center/cover no-repeat var(--user-popout-attachment);
+		z-index: -1;
+	}
+}
+
+// because discord.
+#{c(main dark)},
+#{c(main light)} {
+	#{c(userPopout body)},
+	#{c(userPopout footer)} {
+		background-color: rgba(0,0,0,0.4);
+	}
+	#{c(userPopout actionButton)} {
+		color: $primary;
+		border-color: currentColor;
+		&:hover {
+			color: $hover;
+		}
+	}
+}
+#{c(userPopout footer)} {
+	margin-top: 0;
+}
+
+#{c(userPopout divider)} {
+	display: none;
+}
+#{c(userPopout body)} {
+	padding-top: 8px;
+	#{c(userPopout bodyInnerWrapper)} {
+		padding-right: 0;
+		background-color: transparent;
+	}
+	#{c(userPopout bodyTitle)} {
+		color: white;
+	}
+	#{c(userPopout noteTextArea)} {
+		&:focus {
+			background-color: transparent;
+		}
+	}
+}
+#{c(userPopout input)} {
+	background-color: transparent;
+	&:focus,
+	&#{c(userPopout focused)} {
+		border-color: $primary;
+	}
+}
+
+#{c(userPopout loadingPopout)} {
+	background-color: $card;
+	border-radius: 16px;
+}
+#{c(userPopout avatar)} {
+	background-color: transparent;
+	border-color: transparent;
+}
+#{c(userPopout headerTop)} {
+	background-color: $card;
+	border-bottom: none;
+}
+#{c(userPopout aboutMe)} {
+	background-color: transparent;
+}
+#{c(userPopout activity)} {
+	border-bottom: none;
+}
+#{c(userPopout headerTop)},
+#{c(userPopout activity)} {
+	max-height: 200px;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+	&::-webkit-scrollbar-track {
+		border-color: transparent;
+		background-color: transparent;
+		border: 2px solid transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-clip: padding-box;
+		border: 2px solid transparent;
+		border-radius: 4px;
+		background-color: $primary;
+		min-height: 40px;
+	}
+}
+#{c(userPopout role)} {
+	border: 1px solid; // color does not need to be defined because it's done in element.style
+	background-color: transparent;
+	border-radius: 16px;
+}

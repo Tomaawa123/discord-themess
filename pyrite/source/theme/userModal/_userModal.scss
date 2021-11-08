@@ -1,0 +1,100 @@
+@use "backend" as *;
+/* Start User Modal */
+#{c(main dark)},
+#{c(main light)} {
+  #{c(userModal root)} {
+    box-shadow: none;
+    background: var(--user-modal-image) no-repeat var(--user-modal-attachment) center/cover;
+    // background: linear-gradient(var(--gradient));
+  }
+}
+
+#{c(userModal topSection)} {
+  background: rgba(0,0,0,0.5);
+}
+#{c(userModal headerFill)} {
+	background-color: transparent;
+}
+#{c(userModal tabBar)} {
+  height: auto;
+}
+#{c(userModal tabBarContainer)} {
+  padding-left: 0;
+  border-bottom: none;
+}
+#{c(userModal tabBarContainer)} #{c(userModal top)} #{c(userModal tabBarItem)} {
+  padding: 0 10px;
+  margin: 0 4px;
+  border: 2px solid $primary;
+  border-radius: 5px;
+  @include bg;
+  &:before {
+    background-color: transparent;
+    opacity: 0.2;
+    border-radius: 5px;
+	}
+  &:hover,
+	&:active {
+    border-color: $hover;
+    &:before {
+			background-color: $hover;
+		}
+  }
+  &#{c(userModal tabBarItemSelected)},
+	&[style*="(255, 255, 255)"] {
+		&:before {
+			background-color: $primary;
+		}
+	}
+	&#{c(userModal tabBarItemSelected)} {
+    color: var(--text-normal);
+    border: 2px solid $hover;
+	}
+	// not selected, not hovered
+	&[style*="transparent"] {
+		border: 2px solid $primary !important; // !important reason: element.style
+	}
+	// not selected, hovered
+	&[style*="(255, 255, 255, 0.6)"],
+	// selected
+	&[style*="(255, 255, 255)"] {
+		border: 2px solid $hover !important; // !important reason: element.style
+	}
+}
+
+#{c(userModal body)} {
+  background-color: rgba(0,0,0,0.4);
+  &#{c(userModal bodyNoTabBar)} {
+    border-top: none;
+  }
+  #{c(userModal noteTextArea)} {
+		background-color: transparent;
+    &#{c(chatForm channelTextAreaDisabled)} {
+      background-color: rgba(0,0,0,0.3);
+    }
+  }
+  #{c(userModal userInfoSection)} {
+    padding: 10px 0 0 0;
+    &:not(:first-child) {
+      border-top: none;
+    }
+    #{c(userModal userInfoSectionHeader)} {
+      color: #fff;
+    }
+    #{c(userModal connectedAccount)} {
+      border-color: rgba(255,255,255,0.05);
+      #{c(userModal connectedAccountVerifiedIcon)} {
+        > svg > path {
+          fill: $primary;
+        }
+      }
+    }
+  }
+  #{c(userModal guildAvatarWithoutIcon)} {
+    background-color: rgba(0,0,0,0.5);
+  }
+}
+#{c(userModal avatar)} {
+  border-color: transparent;
+  background-color: transparent;
+}

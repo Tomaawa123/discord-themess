@@ -1,0 +1,601 @@
+@use "start" as *;
+@use "backend" as *;
+/* Begin Keyframes */
+
+// ALWAYS USE FULL MOTION BEFORE ANIMATION.
+
+// used in: sidebar
+@keyframes pulse-07-10 {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+// used in: modals, serverList
+@keyframes numberBadgeFlash {
+  0% {
+    background-color: $primary;
+    filter: drop-shadow(0 0 3px $secondary) drop-shadow(0 0 5px $secondary);
+  }
+  50% {
+    background-color: $secondary;
+    filter: drop-shadow(0 0 3px $primary) drop-shadow(0 0 5px $primary);
+  }
+  100% {
+    background-color: $primary;
+    filter: drop-shadow(0 0 3px $secondary) drop-shadow(0 0 5px $secondary);
+  }
+}
+@keyframes numberBadgeFlashBefore {
+  0% {
+    background-color: $primary;
+  }
+  50% {
+    background-color: $secondary;
+  }
+  100% {
+    background-color: $primary;
+  }
+}
+
+// used in: misc
+@keyframes monke {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// used in: chat
+@keyframes gif-ripple {
+  0% {
+    transform:scale(.4);
+    opacity:1;
+  }
+  90% {
+    transform:scale(1.4);
+    opacity:0;
+  }
+  100% {
+    transform:scale(1.6);
+    opacity:0;
+  }
+}
+@keyframes gif-bounce {
+  25% {
+    transform:scale(.6);
+  }
+  50% {
+    transform:scale(1.2);
+  }
+  100% {
+    transform:scale(1);
+  }
+}
+
+// used in: error
+@keyframes errorScrollMac {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+@keyframes errorPopMac {
+  0% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Begin Misc */
+// Fonts
+// body fonts
+::placeholder, ::-webkit-input-placeholder,
+body, button, input, select, textarea {
+  font-family: var(--body-font);
+}
+::selection {
+  background-color: $secondary;
+
+}
+// code fonts
+code,
+#{c(chatForm inlineCode)},
+#{c(chatForm afterInlineCode)},
+#{c(chatForm beforeInlineCode)},
+#{c(chatForm codeLine)},
+#{c(chatForm codeBlockText)} {
+  font-family: var(--code-font);
+}
+
+// Background
+#{c(main appMount)} {
+  background: transparent;
+	@include bg;
+	&:before {
+		height: 100%;
+		width: 100%;
+		background: var(--background-image) center/cover no-repeat var(--background-attachment);
+	}
+}
+
+// Transparency to allow the background to work.
+html, // because maybe?
+body, // this one is here for transparency in bd to work
+#{c(main appInner)},
+#{c(main bg)},
+#{c(main loadingBackground)},
+#{c(main loadingContainer)} {
+  background: transparent;
+}
+
+// Set z-index
+#{c(main backdropWithLayer)} {
+  z-index: -1000;
+}
+#{c(main pictureInPicture)} {
+  z-index: 1050;
+}
+#{c(os titleBar)} {
+  z-index: 1100;
+}
+
+// Loading Icon. Best seen removing the ONLY reaction of a type in the reaction modal.
+#{c(main loadingSquare)} {
+  background-color: $primary;
+}
+
+// defaults:
+// Windows
+// .platform-win .splashBackground-1FRCko:before{content:"";position:fixed;top:0;right:0;width:84px;height:22px;background:rgba(0,0,0,.3);border-bottom-left-radius:3px;z-index:1;-webkit-transition:background .4s ease .4s;transition:background .4s ease .4s}
+// .platform-win .theme-dark .splashBackground-1FRCko.loggingIn-3Hi-BU:before,
+// .platform-win .theme-light .splashBackground-1FRCko.loggingIn-3Hi-BU:before{background:transparent}
+// .platform-win .scroller-2TZvBN {padding-top: 4px;}
+// .platform-win .standardSidebarView-3F1I7i{top:22px}
+// .platform-win .sidebar-2K8pFh{border-radius:8px 0 0;overflow:hidden}
+// .sidebar-2K8pFh.hasNotice-1XRy4h,
+// .platform-win .sidebar-2K8pFh.hasNotice-1XRy4h{border-radius:0}
+// .platform-win .layer-3QrUeG{top:-22px;padding-top:22px}
+// .platform-win .bg-h5JY_x{top:-22px}
+// .platform-win .videoHeight-Qp_9vC.normal-1jW0uq{height:calc(50vh - 22px)}
+// .platform-win .videoHeight-Qp_9vC.noChat-3nt48u{height:calc(100vh - 22px)}
+// .platform-win .container-16j22k{padding-top:22px;top:-22px}
+
+// MacOS
+// .platform-osx .splashBackground-1FRCko:before{content:"";position:fixed;top:0;left:0;right:0;height:32px;z-index:1;-webkit-app-region:drag}
+// @media (min-width:830px){
+// .splashBackground-1FRCko .logo-1-AbdC{position:fixed;top:24px;left:24px;margin:0}
+// .platform-osx .splashBackground-1FRCko .logo-1-AbdC{top:40px}
+// }
+// .platform-osx .container-1r6BKw{-webkit-app-region:drag}
+// .platform-osx .notice-2FJMB4{-webkit-app-region:drag}
+// .platform-osx .standardSidebarView-3F1I7i:before{content:"";position:fixed;top:0;left:0;right:0;height:22px;z-index:10;-webkit-app-region:drag}
+// .platform-osx .pageHeaderDrag-OPlmbm{-webkit-app-region:drag}
+// .platform-osx .wrapper-1Rf91z{margin-top:32px}
+// .platform-osx .scroller-2TZvBN{padding-top:0}
+
+// Windows
+#{c(os windows)} {
+  #{c(os typeWindows)} {
+    padding-top: 0;
+    margin-top: 0;
+    height: 0;
+    top: calc(var(--channel-tabs-enabled,0) * calc(66px * var(--channel-tabs-enabled,0)));
+    position: relative;
+    @include bg;
+    &:before {
+      -webkit-app-region: drag;
+      height: 18px;
+      position: fixed;
+    }
+    & > #{c(os wordmark)} {
+      display: none;
+    }
+  }
+  #{c(sidebar sidebar)} {
+    border-radius: 0;
+  }
+  #{c(serverList servers)} {
+    margin-top: 48px;
+    overflow: visible;
+    @include bg;
+    &:before {
+      z-index: 1010;
+      background-color: $header;
+      width: 72px;
+      height: 48px;
+      top: -48px;
+    }
+  }
+  #{c(os winButton)} {
+    width: var(--win-min-max-close-button-width);
+  }
+  #{c(os winButtonClose)}:hover {
+    background: $red;
+    color: #fff;
+  }
+  #{c(header toolbar)} {
+    position: relative;
+    right: calc(3 * var(--win-min-max-close-button-width));
+    margin-right: -6px;
+  }
+  #{c(header nicknames)},
+  #{c(header topic)} {
+    margin-right: calc(3 * var(--win-min-max-close-button-width));
+  }
+  #{c(os winButton)} {
+    position: relative;
+    top: 0;
+    height: 48px;
+  }
+}
+
+// Mac
+#{c(os mac)} {
+  #{c(os macButtonMinimize)},
+  #{c(os macButtonMaximize)} {
+    margin-left: 7px;
+  }
+  #{c(os typeMac)} {
+    top: calc(var(--channel-tabs-enabled,0) * calc(66px * var(--channel-tabs-enabled,0)));
+    #{c(os macButtons)} {
+      height: 48px;
+    }
+  }
+  #{c(serverList servers)} {
+    margin-top: 48px;
+    overflow: visible;
+    @include bg;
+    &:before {
+      z-index: 1050;
+      background-color: $header;
+      width: 72px;
+      height: 48px;
+      top: -48px;
+      -webkit-app-region: drag;
+    }
+  }
+  #{c(serverList scroller)} {
+    padding-top: 4px;
+  }
+}
+// Linux, Web
+#{c(os linux)},
+#{c(os web)} {
+  #{c(serverList scroller)} {
+    padding: 4px 0 0 0;
+  }
+  #{c(serverList servers)} {
+    &:before {
+      content: "";
+      background-color: $header;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 48px;
+      z-index: 1010;
+    }
+    > #{c(serverList tree)} {
+      top: 48px;
+      position: relative;
+      height: calc(100vh - 48px);
+    }
+  }
+}
+
+// EGGS!
+#{c(main focused)}#{c(main fullMotion)} #{c(search noResultsImage)}#{c(search OOOOHHHHHHHHBANANA)},
+#{c(main focused)}#{c(main reduceMotion)} #{c(search noResultsImage)}#{c(search OOOOHHHHHHHHBANANA)}:hover {
+  animation: monke 6.9s linear infinite;
+}
+
+// Enable with Beer
+// confused? https://cdn.discordapp.com/attachments/747040126294687764/827442200094179338/unknown.png
+#{c(embeds textOpenFullPreview)} {
+  &:before {
+    content: "🍺";
+  }
+  > svg {
+    display: none;
+  }
+}
+
+#{c(store store)} {
+   #{c(store scroller)} {
+    > #{c(store nitroContainer)} {
+      >div {
+        display: none;
+      }
+      &:before {
+        content: "You're not meant to see this.";
+        display: block;
+        font-size: 30px;
+        color: #fff;
+        text-decoration: underline;
+        text-shadow: 2px 2px 2px #aaa;
+        text-align: center;
+      }
+      &:after {
+        content: "If you *need* this, go into your user settings.";
+        display: block;
+        font-size: 20px;
+        color: var(--text-normal);
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+#{c(store libraryContainer)} {
+  background-color: black;
+  >div,
+  >section {
+    display: none;
+  }
+  &:before {
+    padding-top: 60px;
+    content: "People use this?";
+    display: block;
+    font-size: 30px;
+    color: #fff;
+    text-decoration: underline;
+    text-shadow: 2px 2px 2px #aaa;
+    text-align: center;
+  }
+  &:after {
+    content: "If you *need* this, go to a web browser and search \"Steam Download\". Use that instead.";
+    display: block;
+    font-size: 20px;
+    color: var(--text-normal);
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+/* Checkboxes */
+#{c(main light)},
+#{c(main dark)} {
+  #{c(main checkbox)} {
+    border-color: $primary;
+    &#{c(main checkboxChecked)} {
+      &[style*="border-color: var(--control-brand-foreground);"] {
+        box-shadow: inset 0 0 3px 1px $primary;
+        border-color: $primary !important; // !important reason: element.style
+        > svg > path {
+          fill: $primary;
+        }
+      }
+      &[style*="var(--control-brand-foreground)"] {
+        background-color: transparent !important; // !important reason: element.style
+      }
+      // &[style*="rgba(67, 181, 129, 0.15)"],
+      // &[style*="rgb(67, 181, 129)"] {
+      //   box-shadow: inset 0 0 3px 1px $primary;
+      //   border-color: $primary !important; // !important reason: element.style
+      //   background-color: transparent !important; // !important reason: element.style
+      //   > svg > path {
+      //     fill: $primary;
+      //   }
+      // }
+    }
+  }
+}
+
+/* "Other". */
+// I don't know where this stuff is used in the site.
+#{c(other developerPortalCtaWrapper)} {
+  background-color: $card;
+}
+#{c(other popout)} {
+  background-color: transparent;
+}
+// Rings - tab around and you'll find it.
+#{c(other ring)} {
+  &[style*="var(--focus-primary)"] {
+    --__adaptive-focus-color: var(--primary-color) !important; // !important reason: element.style
+  }
+}
+#{c(main keyboardMode)} #{c(other focusStroke)} {
+  fill: $primary;
+  stroke: $primary;
+}
+// For the little avatars
+#{c(other speaking)},
+#{c(other avatarSpeaking)} {
+  box-shadow: inset 0 0 0 2px $primary;
+}
+// Goto Message Links
+#{c(main anchorLink)} {
+  &[href^="https://canary.discord.com/channels/"],
+  &[href^="https://ptb.discord.com/channels/"],
+  &[href^="https://discord.com/channels/"] {
+    font-size: 0;
+    &:hover {
+      text-decoration: none;
+    }
+    &:hover:before {
+      background-color: $primary;
+      color: #fff;
+    }
+    &:before {
+      content: "Jump to message";
+      font-size: 1rem;
+      padding: 0 3px;
+      border-radius: 3px;
+      color: $primary;
+      text-decoration-color: currentColor;
+    }
+  }
+}
+// insecure links
+a[href^="http://"] {
+  color: $red;
+  text-shadow: 0 0 2px $red;
+}
+
+/* HLJS */
+#{c(hljs comment)},
+#{c(hljs quote)} {
+  font-style: italic;
+}
+
+#{c(modals menu)} {
+  &:before {
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+    pointer-events: none;
+    background-color: transparent;
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+  }
+}
+#{c(main loadingContainer)} {
+  backdrop-filter: blur(5px);
+}
+#{c(modals fullImageModal)},
+#{c(modals notDetachedEmojiPicker)} #{c(modals detachedEmojiPicker)} {
+  backdrop-filter: none;
+}
+
+#{c(memberList wrap)}:hover {
+  backdrop-filter: blur(calc(var(--hide-member-list) * 3px));
+}
+#{c(friends nowPlayingColumn)}:hover,
+#{c(stageDiscovery nowPlayingSidebar)}:hover {
+  backdrop-filter: blur(calc(var(--hide-active-now) * 3px));
+}
+
+#{c(main backdrop)},
+#{c(main backdropWithLayer)},
+#{c(modals uploadArea)} {
+  backdrop-filter: blur(3px);
+  background-color: transparent !important;
+}
+
+/* Version */
+#{c(userSettings sidebarInfo)} {
+  &::after {
+    content: $theme-name str-insert($version, " - ", 0);
+    font-style: italic;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+/* Official Preset Previews */
+#{c(chat messageAttachmentsContainer)} {
+  &#message-accessories-900277937956339712 {
+    margin-bottom: 20px;
+    #{c(embeds textContainerUp)} {
+      border: none;
+      background-color: transparent;
+      #{c(embeds textContainer)} {
+        @include bg;
+        @include bg2;
+        &:before {
+          background: url(https://leafyluigi.github.io/images/Synthscape%20by%20AxiomDesign.png) center/ cover no-repeat;
+        }
+        &:after {
+          background: url(https://leafyluigi.github.io/images/preview-overlay.png) center/ cover no-repeat;
+        }
+        pre {
+          display: none;
+        }
+      }
+    }
+    #{c(embeds textFooter)} {
+      width: 300px;
+      position: relative;
+      bottom: -40px;
+      #{c(embeds toggleExpandedPreview)},
+      #{c(embeds attachmentName)},
+      #{c(embeds attachmentSize)},
+      #{c(embeds codeIcon)} {
+        display: none;
+      }
+    }
+  }
+  &#message-accessories-900283733997920267 {
+    margin-bottom: 20px;
+    #{c(embeds textContainerUp)} {
+      border: none;
+      background-color: transparent;
+      #{c(embeds textContainer)} {
+        @include bg;
+        @include bg2;
+        &:before {
+          background: url('https://leafyluigi.github.io/images/Xieleqiao Town by Huangdan2060.png') center/ cover no-repeat;
+        }
+        &:after {
+          background: url(https://leafyluigi.github.io/images/preview-overlay.png) center/ cover no-repeat;
+        }
+        pre {
+          display: none;
+        }
+      }
+    }
+    #{c(embeds textFooter)} {
+      width: 300px;
+      position: relative;
+      bottom: -40px;
+      #{c(embeds toggleExpandedPreview)},
+      #{c(embeds attachmentName)},
+      #{c(embeds attachmentSize)},
+      #{c(embeds codeIcon)} {
+        display: none;
+      }
+    }
+  }
+}
+
+/* Tags */
+#{c(chat messageContents)} > #{c(chat chatAvatar)} ~ #{c(chat chatHeaderUsername)} #{c(chat chatUsername)}:after {
+  content: var(--local-tag, none);
+  color: currentcolor;
+  font-size: 11px;
+  display: inline-block;
+  margin-left: 4px;
+  transform: skewX(-15deg);
+}
+
+$dev: (
+  "309976820109803520", // Nao Tomori
+);
+$helper: (
+  "126652966265421824", // Scars
+  "393900343135830016", // Nyx
+);
+
+#{c(chat chatAvatar)} {
+  @each $userID in $dev {
+    &[src*="#{$userID}"] ~ #{c(chat chatHeaderUsername)} {
+      --local-tag: "Theme Dev";
+    }
+  }
+  @each $userID in $helper {
+    &[src*="#{$userID}"] ~ #{c(chat chatHeaderUsername)} {
+      --local-tag: "Theme Helper";
+    }
+  }
+}

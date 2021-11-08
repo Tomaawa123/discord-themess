@@ -1,0 +1,136 @@
+@use "backend" as *;
+/* Begin Chat Form */
+#{c(main dark)} {
+  #{c(chatForm channelTextAreaBase)} {
+    background-color: transparent;
+    @include bg;
+    &::before {
+      background-color: rgba(255,255,255,0.1);
+    }
+    &:focus-within {
+      &::before {
+        background-color: $card;
+      }
+    }
+    &#{c(chatForm channelTextAreaDisabled)} {
+      background-color: rgba(0,0,0,0.3);
+    }
+  }
+}
+#{c(main light)} {
+  #{c(chatForm channelTextAreaBase)} {
+    &::before {
+      background-color: rgba(255,255,255,0.1);
+    }
+    &:focus-within {
+      &::before {
+        background-color: rgba(255,255,255,0.5);
+      }
+    }
+    &#{c(chatForm channelTextAreaDisabled)} {
+      background-color: rgba(255,255,255,0.3);
+    }
+  }
+}
+
+#{c(chatForm form)} {
+  margin-top: 0;
+  &::before {
+    content: none;
+  }
+}
+#{c(chatForm wrapper)} {
+  z-index: 0;
+  background-color: rgba(255,255,255,0.1);
+  backdrop-filter: blur(2px);
+  #{c(chatForm image)} {
+    display: none;
+  }
+  #{c(chatForm text)} {
+    &>div {
+      color: #fff;
+    }
+  }
+}
+
+#{c(chatForm channelTextAreaBase)} {
+  background-color: transparent;
+  backdrop-filter: blur(2px);
+  @include bg;
+  &::before {
+    opacity: 1;
+    border-radius: 8px;
+  }
+  &:focus-within {
+    box-shadow: 0 0 2px 2px $primary;
+    &::before {
+      opacity: 0.5;
+    }
+  }
+
+  &#{c(chatForm channelTextAreaDisabled)} {
+    &::before {
+      content: none;
+    }
+  }
+}
+
+#{c(chatForm jumpToPresentBar)} {
+  background-color: $card;
+  opacity: 1;
+  backdrop-filter: blur(3px);
+  transition: backdrop-filter 0.15s;
+  &:active {
+    backdrop-filter: blur(5px);
+  }
+}
+#{c(chatForm messagesErrorBar)} {
+  background-color: $red;
+  opacity: 1;
+}
+
+#{c(chatForm scrollableContainer)},
+#{c(chatForm attachedBars)},
+#{c(chatForm replyBar)},
+#{c(chatForm threadSuggestionBar)} {
+  background-color: transparent;
+}
+#{c(chatForm clipContainer)} {
+  margin-top: 0;
+  padding-top: 0;
+}
+#{c(chatForm scrollableContainer)} {
+  max-height: 20vh;
+}
+#{c(chatForm replyContainer)} {
+  #{c(chatForm replyName)} {
+    color: $primary;
+    text-shadow: 2px 2px 4px currentColor;
+  }
+  #{c(chatForm replyActions)} {
+    #{c(chatForm colorLink)} {
+      color: $green;
+    }
+    #{c(chatForm colorMuted)} {
+      color: $red;
+    }
+  }
+}
+#{c(chatForm attachButtonPlus)} {
+  fill: #cdcdcd;
+}
+#{c(chatForm textArea)} {
+  #{c(chatForm placeholder)} {
+    color: #cdcdcd;
+  }
+}
+#{c(chatForm paidGifTooltip)} {
+  background-color: $card;
+}
+
+// delete nitro button. might cock up a few plugins.
+#{c(chatForm buttons)} {
+  > #{c(chatForm button)} {
+    display: none;
+  }
+}

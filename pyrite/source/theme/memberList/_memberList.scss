@@ -1,0 +1,74 @@
+@use "backend" as *;
+/* Start Member List */
+
+#{c(chat chatContentInner)} ~ div,
+#{c(chat chatContentInner)} ~ aside {
+  width: 240px;
+  background-color: $side;
+  left: calc( ( 240px - 60px ) * var(--hide-member-list));
+  transition: .5s all ease-out;
+  margin-left: calc( -1 * (( 240px - 60px ) * var(--hide-member-list)));
+  position: relative;
+  &:hover {
+    left: 0;
+	}
+}
+#{c(memberList wrap)} {
+  background-color: transparent;
+  min-width: auto;
+  flex-basis: 0px;
+	#{c(memberList members)} {
+    background-color: transparent;
+    &>div {
+      background-color: transparent;
+    }
+    #{c(memberList offline)} {
+      opacity: 0.7;
+      transition: 0.25s all ease-in-out;
+      #{c(memberList avatar)} {
+        filter: grayscale(100%);
+      }
+      &:hover {
+        opacity: 1;
+        #{c(memberList avatar)} {
+          filter: none;
+        }
+      }
+    }
+	}
+}
+#{c(memberList group)} {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:after {
+    content: "";
+    height: 2px;
+    flex-grow: 1;
+    background: linear-gradient(to right, currentColor -50%, transparent 50%);
+    margin-left: 5px;
+  }
+}
+#{c(memberList status)} {
+	[mask*="online"],
+	[fill*="hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%)"] {
+		fill: $green;
+	}
+	[mask*="idle"],
+	[fill*="hsl(38, calc(var(--saturation-factor, 1) * 95.7%), 54.1%)"] {
+		fill: $yellow;
+	}
+	[mask*="dnd"],
+	[fill*="hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%)"] {
+		fill: $red;
+	}
+	[mask*="streaming"],
+	[fill*="hsl(262, calc(var(--saturation-factor, 1) * 46.8%), 39.8%)"] {
+		fill: $live;
+	}
+	[mask*="offline"],
+	[fill*="hsl(214, calc(var(--saturation-factor, 1) * 9.9%), 50.4%)"] {
+		fill: $offline;
+	}
+}

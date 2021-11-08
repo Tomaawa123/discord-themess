@@ -1,0 +1,96 @@
+@use "backend" as *;
+/* Start Discovery Page */
+#{c(main light)},
+#{c(main dark)} {
+  #{c(discover pageWrapper)} {
+    background-color: transparent;
+    @include bg;
+    &:before {
+      background-color: $header;
+      height: 48px;
+      z-index: 1001;
+    }
+  }
+  #{c(discover card)},
+  #{c(discover cardIconMask)},
+  #{c(discover card)}:hover,
+  #{c(discover card)}:hover #{c(discover cardIconMask)},
+  #{c(discover cardIconMask)}:hover {
+    background-color: $card;
+  }
+}
+
+#{c(discover scroller)} {
+  margin-top: 48px;
+  background-color: $middle;
+  height: calc(100% - 48px);
+}
+
+#{c(discover header)} {
+  margin-top: 60px;
+  text-align: center;
+  z-index: 1001;
+  @include header;
+}
+#{c(discover categoryItem)} {
+  &#{c(discover categoryItemSelected)} #{c(discover categoryItemInner)} {
+    background-color: $primary;
+  }
+}
+#{c(discover searchHeader)} {
+  #{c(discover searchHeaderImage)} {
+    display: none;
+  }
+}
+#{c(discover spinner)},
+#{c(discover searchSpinner)} {
+  background-color: $card;
+}
+#{c(discover card)} {
+  border: 2px solid $primary;
+}
+
+#{c(discover cardLoading)} {
+  background-color: transparent;
+}
+
+#{c(discover viewWrapper)} {
+  #{c(discover search)} #{c(discover searchBox)} {
+    background-color: $card;
+    box-shadow: none;
+    &:focus,
+    &:focus-within {
+      border-color: $primary;
+      box-shadow: 0 0 3px 3px $primary;
+    }
+    #{c(discover searchBoxInput)},
+    #{c(discover searchCloseIcon)},
+    #{c(discover searchCloseIcon)}:hover,
+    #{c(discover searchSearchIcon)} {
+      color: var(--text-normal);
+    }
+  }
+}
+
+#{c(discover searchEmptyContainer)} {
+  padding: 0;
+  background-color: transparent;
+  #{c(discover searchEmptyImage)} {
+    display: none;
+  }
+}
+
+#{c(discover searchPlaceholder)} {
+  background-color: $card;
+}
+
+#{c(discover searchCategoryPill)}#{c(discover searchCategorySelected)} {
+  background-color: $primary;
+}
+
+#{c(discover langSelect)},
+#{c(discover langSelectSelected)},
+#{c(discover langSelectSelected2)},
+#{c(discover langSelectDropdown)} {
+  background-color: $card;
+}
